@@ -110,4 +110,4 @@ def new_matrix(rows = 4, cols = 4):
             m[c].append( 0 )
     return m
 
-print generate_curve_coefs(1, 2, 3, 4, "bezier" )
+
