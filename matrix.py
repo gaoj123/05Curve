@@ -12,14 +12,19 @@ def make_bezier():
 def make_hermite():
     t=new_matrix()
     ident(t)
-    t[0]=[0,1,0,3]
-    t[1]=[0,1,0,2]
-    t[2]=[0,1,1,1]
-    t[3]=[1,1,0,0]
+    t[0]=[2,-3,0,1]
+    t[1]=[-2,3,0,0]
+    t[2]=[1,-2,1,0]
+    t[3]=[1,-1,0,0]
     return t
 
 def generate_curve_coefs( p1, p2, p3, p4, t ):
-    pass
+    givenMatrix=[[p1,p2,p3,p4]]
+    if t=="bezier":
+        matrix_mult(make_bezier(),givenMatrix) ##4 points
+    elif t=="hermite":
+        matrix_mult(make_hermite(),givenMatrix) ##p1 and p2 are endpoints, p3 and p4 are rates of change at the endpoints
+    return givenMatrix
 
 
 def make_translate( x, y, z ):
@@ -104,3 +109,5 @@ def new_matrix(rows = 4, cols = 4):
         for r in range( rows ):
             m[c].append( 0 )
     return m
+
+print generate_curve_coefs(1, 2, 3, 4, "bezier" )

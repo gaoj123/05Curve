@@ -1,12 +1,35 @@
 from display import *
 from matrix import *
-
+import math
 
 def add_circle( points, cx, cy, cz, r, step ):
-    pass
+    for i in range(1, step+1):
+        x=r*math.cos(2*math.pi*i/step)+cx
+        y=r*math.sin(2*math.pi*i/step)+cy
+        add_point(points, x, y, 0)
 
 def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
-    pass
+    if curve_type=="hermite":
+        coeffX=generate_curve_coefs(x0,x1,x2,x3,"hermite") ##x2 and x3 are rates of change
+        coeffY=generate_curve_coefs(y0,y1,y2,y3,"hermite") ##x2 and x3 are rates of change
+    else:
+        coeffX=generate_curve_coefs(x0,x1,x2,x3,"bezier")
+        coeffY=generate_curve_coefs(y0,y1,y2,y3,"bezier")
+    print coeffX
+    print coeffY
+    for i in range(1, step+1):
+        ax=coeffX[0][0]
+        bx=coeffX[0][1]
+        cx=coeffX[0][2]
+        dx=coeffX[0][3]
+        ay=coeffY[0][0]
+        by=coeffY[0][1]
+        cy=coeffY[0][2]
+        dy=coeffY[0][3]
+        t=(i+0.0)/step
+        x=ax*(t**3)+bx*(t**2)+cx*t+dx
+        y=ay*(t**3)+by*(t**2)+cy*t+dy
+        add_point(points, x, y, 0)
 
 
 
