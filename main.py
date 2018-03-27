@@ -26,7 +26,9 @@ transform = new_matrix()
 
 #Mr. DW's script
 color = [ 0, 255, 0 ]
-#parse_file( 'script', edges, transform, screen, color )
+parse_file( 'script', edges, transform, screen, color )
+
+edges=[]
 
 #My script (mushroom)
 color=[255,1,1]
